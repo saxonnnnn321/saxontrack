@@ -1,28 +1,47 @@
 @import "tailwindcss";
 
 :root {
-  /* Warm, calm palette — matches the editorial screenshot */
-  --background: #f4f1ea;
+  /* Premium light base — warm neutral, lots of air */
+  --background: #f4f3f0;
   --surface: #ffffff;
-  --foreground: #1c1b19;
-  --muted: #8a857a;
-  --border: #e7e2d7;
-  --accent: #6f8f3e;      /* restrained olive-green for positive/progress */
-  --accent-soft: #eef1e4;
+  --surface-2: #faf9f7;
+  --foreground: #17160f;
+  --muted: #8b8a82;
+  --faint: #b7b5ad;
+  --border: #ebe9e3;
+  --hairline: #f0eee9;
+  --ink: #17160f;
+
+  /* Per-score colours (Bevel-style) */
+  --score-recovery: #2fa36b; /* green */
+  --score-strain: #e8823a;   /* orange */
+  --score-sleep: #5a73d6;    /* indigo */
+  --score-stress: #cf6b60;   /* rose */
+
+  --accent: var(--score-recovery);
+  --accent-soft: #e9f3ee;
   --warning: #c07a3e;
-  --ink: #14130f;         /* near-black hero card */
+
+  --shadow-card: 0 1px 2px rgba(23, 22, 15, 0.04), 0 6px 20px rgba(23, 22, 15, 0.05);
 }
 
 @theme inline {
   --color-background: var(--background);
   --color-surface: var(--surface);
+  --color-surface-2: var(--surface-2);
   --color-foreground: var(--foreground);
   --color-muted: var(--muted);
+  --color-faint: var(--faint);
   --color-border: var(--border);
+  --color-hairline: var(--hairline);
+  --color-ink: var(--ink);
   --color-accent: var(--accent);
   --color-accent-soft: var(--accent-soft);
   --color-warning: var(--warning);
-  --color-ink: var(--ink);
+  --color-recovery: var(--score-recovery);
+  --color-strain: var(--score-strain);
+  --color-sleep: var(--score-sleep);
+  --color-stress: var(--score-stress);
   --font-sans: var(--font-sans-src);
   --font-display: var(--font-display-src);
 }
@@ -32,13 +51,31 @@ body {
   color: var(--foreground);
   font-family: var(--font-sans), system-ui, sans-serif;
   -webkit-font-smoothing: antialiased;
+  text-rendering: optimizeLegibility;
 }
 
-/* Small caps labels used throughout the dashboard */
+/* Uppercase micro-label used throughout */
 .label {
   font-size: 0.6875rem;
-  letter-spacing: 0.14em;
+  letter-spacing: 0.13em;
   text-transform: uppercase;
   color: var(--muted);
   font-weight: 600;
 }
+
+.card {
+  background: var(--surface);
+  border: 1px solid var(--border);
+  border-radius: 1.25rem;
+  box-shadow: var(--shadow-card);
+}
+
+.tnum {
+  font-variant-numeric: tabular-nums;
+}
+
+@keyframes rise {
+  from { opacity: 0; transform: translateY(6px); }
+  to { opacity: 1; transform: translateY(0); }
+}
+.rise { animation: rise 0.5s cubic-bezier(0.22, 1, 0.36, 1) both; }

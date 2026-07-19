@@ -1,9 +1,10 @@
 import { format, subDays } from "date-fns";
 import type { MetricEntry } from "./types";
-import { getEntries, getSettings, patchSettings, replaceAll } from "./store";
+import { replaceAll } from "./store";
 
-// Deterministic-ish demo data so a fresh visit looks alive (matches the
-// screenshot vibe). Runs once; the user can clear it and log their own.
+// Optional demo data — NOT loaded automatically. The dashboard starts empty so
+// the user logs their own; they can tap "Load sample data" to preview a filled
+// dashboard, or "Clear" to wipe it.
 function makeDemo(): MetricEntry[] {
   const out: MetricEntry[] = [];
   const now = new Date();
@@ -12,11 +13,10 @@ function makeDemo(): MetricEntry[] {
     metric: MetricEntry["metric"],
     values: Record<string, number>,
   ) => {
-    const date = format(subDays(now, daysAgo), "yyyy-MM-dd");
     out.push({
       id: crypto.randomUUID(),
       metric,
-      date,
+      date: format(subDays(now, daysAgo), "yyyy-MM-dd"),
       values,
       source: "manual",
       createdAt: subDays(now, daysAgo).toISOString(),
@@ -36,9 +36,10 @@ function makeDemo(): MetricEntry[] {
   return out;
 }
 
-/** Load demo data once, only if the user has no entries yet. */
-export function seedIfEmpty(): void {
-  if (getSettings().seeded) return;
-  if (getEntries().length === 0) replaceAll(makeDemo());
-  patchSettings({ seeded: true });
+export function loadSampleData(): void {
+  replaceAll(makeDemo());
+}
+
+export function clearAllData(): void {
+  replaceAll([]);
 }

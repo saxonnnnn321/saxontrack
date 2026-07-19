@@ -33,35 +33,35 @@ export default function MetricCard({
       : null;
 
   return (
-    <div className="rounded-2xl bg-surface border border-border p-4 flex flex-col gap-3">
+    <div className="card p-4 flex flex-col gap-3">
       <div className="flex items-center justify-between">
         <span className="label">{cfg.label}</span>
         {streak.current >= 2 && (
-          <span className="text-[11px] font-semibold text-accent">
+          <span className="text-[11px] font-semibold text-accent tnum">
             🔥 {streak.current}
           </span>
         )}
       </div>
 
       <div className="flex items-baseline gap-1">
-        <span className="text-3xl font-display font-medium tabular-nums">
+        <span className="text-[1.7rem] leading-none font-display font-medium tnum">
           {hasData ? cfg.format(value!) : "—"}
         </span>
         {cfg.unit && hasData && (
-          <span className="text-sm text-muted font-medium">{cfg.unit}</span>
+          <span className="text-xs text-muted font-medium">{cfg.unit}</span>
         )}
       </div>
 
       {pct !== null ? (
-        <div className="h-1.5 rounded-full bg-border overflow-hidden">
+        <div className="h-1 rounded-full bg-hairline overflow-hidden">
           <div
-            className="h-full rounded-full bg-accent transition-[width] duration-500"
-            style={{ width: `${pct * 100}%` }}
+            className="h-full rounded-full transition-[width] duration-500"
+            style={{ width: `${pct * 100}%`, background: "var(--accent)" }}
           />
         </div>
       ) : null}
 
-      <Sparkline data={series.map((d) => d.value)} style={cfg.spark} />
+      <Sparkline data={series.map((d) => d.value)} style={cfg.spark} height={34} />
     </div>
   );
 }
