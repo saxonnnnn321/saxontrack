@@ -44,7 +44,7 @@ export const METRICS: Record<MetricKey, MetricConfig> = {
     key: "sleep",
     label: "Sleep",
     primaryField: "hours",
-    unit: "h",
+    unit: "", // format() already includes h/m
     defaultTarget: 8,
     aggregation: "avg",
     card: "progress",
@@ -60,7 +60,7 @@ export const METRICS: Record<MetricKey, MetricConfig> = {
     key: "water",
     label: "Water",
     primaryField: "ml",
-    unit: "L",
+    unit: "", // format() already includes L
     defaultTarget: 2000,
     aggregation: "sum",
     card: "progress",
@@ -72,7 +72,7 @@ export const METRICS: Record<MetricKey, MetricConfig> = {
     key: "workouts",
     label: "Training",
     primaryField: "minutes",
-    unit: "min",
+    unit: "", // format() already includes min
     defaultTarget: 30,
     aggregation: "sum",
     card: "progress",
