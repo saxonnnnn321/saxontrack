@@ -1,26 +1,44 @@
 @import "tailwindcss";
 
 :root {
-  --background: #ffffff;
-  --foreground: #171717;
+  /* Warm, calm palette — matches the editorial screenshot */
+  --background: #f4f1ea;
+  --surface: #ffffff;
+  --foreground: #1c1b19;
+  --muted: #8a857a;
+  --border: #e7e2d7;
+  --accent: #6f8f3e;      /* restrained olive-green for positive/progress */
+  --accent-soft: #eef1e4;
+  --warning: #c07a3e;
+  --ink: #14130f;         /* near-black hero card */
 }
 
 @theme inline {
   --color-background: var(--background);
+  --color-surface: var(--surface);
   --color-foreground: var(--foreground);
-  --font-sans: var(--font-geist-sans);
-  --font-mono: var(--font-geist-mono);
-}
-
-@media (prefers-color-scheme: dark) {
-  :root {
-    --background: #0a0a0a;
-    --foreground: #ededed;
-  }
+  --color-muted: var(--muted);
+  --color-border: var(--border);
+  --color-accent: var(--accent);
+  --color-accent-soft: var(--accent-soft);
+  --color-warning: var(--warning);
+  --color-ink: var(--ink);
+  --font-sans: var(--font-sans-src);
+  --font-display: var(--font-display-src);
 }
 
 body {
   background: var(--background);
   color: var(--foreground);
-  font-family: Arial, Helvetica, sans-serif;
+  font-family: var(--font-sans), system-ui, sans-serif;
+  -webkit-font-smoothing: antialiased;
+}
+
+/* Small caps labels used throughout the dashboard */
+.label {
+  font-size: 0.6875rem;
+  letter-spacing: 0.14em;
+  text-transform: uppercase;
+  color: var(--muted);
+  font-weight: 600;
 }
